@@ -7,19 +7,17 @@ router.get('/sanity', (req, res) => {
     res.send('Route works')
 })
 
-router.get('/:city', async (req, res) => {
-    const apiKey = '723348825a8e44e130ab3d3b34b25f25'
+router.get('/weather/:city', async (req, res) => {
     const city = req.params.city
     try {
         let weather = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`)
         weather = weather.data
-        const cityWeather = new City ({
+        const cityWeather = {
             name: city,
             temp: weather.main.temp,
             condition: weather.weather[0].main,
             conditionPic: weather.weather[0].icon
-        })
-        cityWeather.save()
+        }
         res.send(cityWeather)
     } catch (err) {
         res.send(err.message)
@@ -27,13 +25,27 @@ router.get('/:city', async (req, res) => {
 })
 
 router.get('/cities', async (req, res) => {
-    try {
+       try {
+        console.log('try')
         const cities = await City.find({})
         res.send(cities)
     } catch {
+        console.log('error')
         res.send(err.message)
     }
 })
 
+router.post('/weather/:city', async (req, res) => {
+    const city = new City ({...req.body})
+    await city.save()
+    res.send(city)
+})
+
+router.delete('/weather/:city', async (req, res) => {
+    const id = req.params.city
+    console.log(id)
+    await City.findOneAndDelete({name: id})
+    res.end()
+})
 
 module.exports = router
