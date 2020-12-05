@@ -8,24 +8,14 @@ body {
   body {
     background-size: auto 100vh;
     display: grid;
-    grid-template-rows: 1fr 4fr;
+    grid-template-rows: 15vh auto;
     grid-template-areas: "i" "w";
     padding: 5vw;
     height: 90vh;
     width: 90vw;
   }
-}
 
-@media (orientation: landscape) {
-  body {
-    background-size: 100vw;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-areas: "i w";
-    padding: 5vw;
-  }
-}
-
+  
 #input-container {
   grid-area: i;
   display: grid;
@@ -76,18 +66,19 @@ body {
 .cityWeather {
   display: grid;
   grid-template-areas: 
-  "b b b b" 
-  "n n n n" 
-  "t t t t" 
-  "c c c p";
+  "b b b" 
+  "n n n" 
+  "t t t" 
+  "c c p";
   justify-items: center;
   align-items: center;
-  padding: 10px;
+  padding-bottom: 2vh;
 }
 
 .buttons {
   grid-area: b;
   justify-content: center;
+  padding-bottom: .5vh;
 }
 .save {
   border: none;
@@ -113,10 +104,10 @@ body {
   } 
 
 .name {
-  font-size: 1.5vh;
+  font-size: 2.5vh;
   text-justify: center;
   grid-area: n;
-  padding-bottom: .3vh;
+  padding-bottom: 1vh;
 }
 
 .temp {
@@ -131,14 +122,157 @@ body {
   font-size: 2vh;
   display: flex;
   align-self: center;
+  justify-self: center;
+  padding: none;
+}
+
+.pic-container {
+    grid-area: p;
+    /* display: flex;
+    width: 2vh;
+    height: 2vh;
+    padding: none; */
+    justify-self: left;
+}
+
+.pic {
+  /* width: 3vh;
+  height: 3vh; */
+  overflow: hidden;
+  /* object-fit: cover; */
+  display: flex;
+  justify-content: left;
+  padding: none;
+}
+
+}
+
+@media (orientation: landscape) {
+  body {
+    background-size: 100vw;
+    display: grid;
+    grid-template-columns: 20vw auto;
+    grid-template-areas: "i w";
+    padding: 2vh;
+  }
+
+#input-container {
+  grid-area: i;
+  display: grid;
+  align-content: center;
+  grid-template-areas: "q s";
+  padding: none;
+}
+
+#input {
+  grid-area: q;
+  width: 20vw;
+  font-size: 5vh;
+  border: none;
+  background: transparent;
+  color: white;
+}
+
+.search {
+  grid-area: s;
+  display: grid;
+  font-size: x-large;
+  border: none;
+  background: transparent;
+  color: white;
+}
+
+.button {
+  border: none;
+  font-size: large;
+  background: transparent;
+}
+
+#cities-container {
+  grid-area: w;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(30vh, 40fr));
+  grid-template-rows: repeat(auto-fill, minmax(30vh, 40fr));
+  grid-auto-flow: dense;
+  color: white;
+}
+
+.cityWeather {
+  display: grid;
+  grid-template-areas: 
+  "b b b" 
+  "n n n" 
+  "t t t" 
+  "c c p";
+  justify-items: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.buttons {
+  grid-area: b;
+  justify-content: center;
+  padding-bottom: 1vh;
+}
+.save {
+  border: none;
+  background: transparent;
+  font-size: large;
+  color: white;
+  padding-right: 1.5vw;
+  }
+
+  .refresh {
+    border: none;
+    background: transparent;
+    font-size: large;
+    color: white;
+    padding-right: 1.5vw;
+  }
+  
+  .delete {
+    border: none;
+    background: transparent;
+    font-size: large;
+    color: white;
+  } 
+
+.name {
+  font-size: 3vh;
+  text-justify: center;
+  grid-area: n;
+  padding-bottom: 2vh;
+}
+
+.temp {
+  font-size: 8vh;
+  padding: none;
+  align-self: center;
+  grid-area: t;
+}
+
+.condition {
+  grid-area: c;
+  font-size: 2vh;
+  display: flex;
+  align-self: center;
   justify-content: right;
   padding: none;
 }
 
-.pic {
+.pic-container {
     grid-area: p;
-    size: 1.5vh;
+    size: 2vh;
     padding: none;
-    justify-content: left;
-    object-fit: cover;
+    justify-self: left;  
+}
+
+.pic {
+  object-fit: contain;
+  height: 8vh;
+  width: 8vh;
+  padding: none;
+}
 }

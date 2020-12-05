@@ -16,7 +16,7 @@ router.get('/weather/:city', async (req, res) => {
         let weather = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`)
         weather = weather.data
         const cityWeather = {
-            name: city,
+            name: weather.name,
             temp: Math.round(weather.main.temp),
             condition: weather.weather[0].main,
             conditionPic: `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`
@@ -31,8 +31,8 @@ router.get('/cities', async (req, res) => {
        try {
         const cities = await City.find({})
         res.send(cities)
-    } catch {
-        console.log('error')
+    } catch (err) {
+        console.log(err.message)
         res.send(err.message)
     }
 })
@@ -43,10 +43,29 @@ router.post('/weather/:city', async (req, res) => {
     res.send(city)
 })
 
+router.put('/weather/:city', async (req, res) => {
+    const name = req.params.city
+    console.log(name)
+    try {
+    let weather = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${name}&units=metric&appid=${apiKey}`)
+        weather = weather.data
+        const cityWeather = {
+            name: weather.name,
+            temp: Math.round(weather.main.temp),
+            condition: weather.weather[0].main,
+            conditionPic: `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`
+        }
+        console.log(cityWeather)
+    await City.findOneAndUpdate({name: cityWeather.name}, {cityWeather})
+    res.send(cityWeather)
+    } catch (err) {
+        res.send(err.message)
+    }
+})
+
 router.delete('/weather/:city', async (req, res) => {
-    const id = req.params.city
-    console.log(id)
-    await City.findOneAndDelete({name: id})
+    const name = req.params.city
+    await City.findOneAndDelete({name: name})
     res.end()
 })
 

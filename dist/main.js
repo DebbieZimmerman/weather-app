@@ -4,8 +4,8 @@ const render = new Renderer()
 const loadPage = async () => {
         try {
             render.renderData(await manager.getDataFromDB())
-        } catch {
-            console.log(error.message)
+        } catch (err) {
+            console.log(err.message)
         }
     }
 
@@ -17,15 +17,22 @@ const handleSearch = async () => {
         $(input).val('')
         await manager.getCityData(city)
         render.renderData(manager.cityData)
-    } catch (error) {
-        alert(error.message)
-        console.log(error)
+    } catch (err) {
+        alert(err.message)
+        console.log(err)
     }
 }
 
 $('#cities-container').on('click', '.save', async function () {
     const cityName = $(this).closest('.cityWeather').find('.name').text()
     await manager.saveCity(cityName)
+    render.renderData(manager.cityData)
+})
+
+
+$('#cities-container').on('click', '.refresh', async function () {
+    const cityName = $(this).closest('.cityWeather').find('.name').text()
+    await manager.updateCity(cityName)
     render.renderData(manager.cityData)
 })
 
