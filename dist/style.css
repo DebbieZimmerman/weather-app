@@ -29,23 +29,32 @@ body {
 #input-container {
   grid-area: i;
   display: grid;
-  justify-content: center;
+  /* justify-content: center; */
   align-content: center;
+  grid-template-areas: ". q s .";
+  grid-template-columns: 1.9fr 2fr 1fr 1fr;
+  
 }
 
 #input {
+  grid-area: q;
+  width: 100%;
+  height: fit-content;
   font-size: xx-large;
-  width: 50%;
   border: none;
   background: transparent;
   color: white;
+  
 }
 
 .search {
-  font-size: x-large;
+  grid-area: s;
+  display: grid;
+  font-size: xx-large;
   border: none;
   background: transparent;
   color: white;
+  justify-content: left;
 }
 .button {
   border: none;
@@ -61,12 +70,13 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-template-rows: repeat(auto-fill, minmax(250px, 1fr));
   grid-auto-flow: dense;
+  color: white;
 }
 
 .cityWeather {
   display: grid;
   grid-template-areas: 
-  "s . . d" 
+  "b b b b" 
   "n n n n" 
   "t t t t" 
   "c c c p";
@@ -75,29 +85,42 @@ body {
   padding: 10px;
 }
 
+.buttons {
+  grid-area: b;
+  justify-content: center;
+}
 .save {
+  border: none;
+  background: transparent;
+  font-size: x-large;
+  color: white;
+  padding-right: 1.5vh;
+  }
+
+  .refresh {
     border: none;
     background: transparent;
-    grid-area: s;
-    justify-content: left;
+    font-size: x-large;
+    color: white;
+    padding-right: 1.5vh;
   }
   
   .delete {
     border: none;
     background: transparent;
-    grid-area: d;
-    justify-content: right;
-  }
+    font-size: x-large;
+    color: white;
+  } 
 
 .name {
   font-size: 1.5vh;
   text-justify: center;
   grid-area: n;
-  padding: none;
+  padding-bottom: .3vh;
 }
 
 .temp {
-  font-size: 3vh;
+  font-size: 4vh;
   padding: none;
   align-self: center;
   grid-area: t;
@@ -108,12 +131,14 @@ body {
   font-size: 2vh;
   display: flex;
   align-self: center;
-  justify-content: center;
+  justify-content: right;
   padding: none;
 }
 
 .pic {
     grid-area: p;
-    font-size: 1.5vh;
+    size: 1.5vh;
     padding: none;
+    justify-content: left;
+    object-fit: cover;
 }

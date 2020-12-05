@@ -8,8 +8,8 @@ class TempManager {
             const cities = await $.get(`/cities`)
             cities.forEach(c => this.cityData.unshift(c))
             return (this.cityData)
-        } catch {
-            alert(error.message)
+        } catch (error) {
+            console.log(error.message)
         }
     }
 
@@ -18,7 +18,7 @@ class TempManager {
             const cityWeather = await $.get(`/weather/${city}`)
             await this.cityData.unshift(cityWeather)
         } catch (error) {
-            alert(error.message)
+            console.log(error.message)
         }
     }
 
@@ -29,7 +29,7 @@ class TempManager {
             this.cityData.splice(index, 1)
             this.cityData.unshift(cityWeather)
 
-        } catch {
+        } catch (error) {
             alert(error.message)
         }
     }

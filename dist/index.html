@@ -26,9 +26,13 @@
     <script id="cities-template" type="text/x-handlebars-template">
         {{#each this}}
         <div id= {{name}} class="cityWeather">
-            <div><button class="save" type="button"><i class="fas fa-plus-circle"></i></button><button class="delete" type="button"><i class="fas fa-minus-circle"></i></button></div>
+            <div class="buttons">
+                <button class="save" type="button"><i class="fas fa-plus-circle"></i></button>
+            <button class="refresh" type="button"><i class="fas fa-sync-alt"></i></button>
+                <button class="delete" type="button"><i class="fas fa-minus-circle"></i></button></i>
+            </div>
             <div class="name">{{name}}</div>
-            <div class="temp">{{temp}}&#8451</div>
+            <div class="temp">{{temp}}&#176</div>
             <div class="condition">{{condition}}</div>
             <img class="pic" src= {{conditionPic}} 
                 onerror="if (this.src != 'error.jpg') this.src = 'https://icon-library.com/images/weather-icon/weather-icon-14.jpg'"

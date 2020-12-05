@@ -15,7 +15,6 @@ const handleSearch = async () => {
     try {
         const city = $(input).val()
         $(input).val('')
-        console.log(city)
         await manager.getCityData(city)
         render.renderData(manager.cityData)
     } catch (error) {
