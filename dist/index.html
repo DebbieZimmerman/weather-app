@@ -1,10 +1,49 @@
 <!DOCTYPE html>
+<html lang="en">
+
 <head>
-
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <title>My weather</title>
+    <link rel="icon" href="https://icon-library.com/images/weather-icon/weather-icon-14.jpg" type="image/icon type">
+    <link href="<link rel=" preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="./font-awesome/css/font-awesome.css">
 </head>
-<body>
 
-    <!-- <jquery></jquery> -->
-    
+<body>
+    <div id="input-container">
+        <input id="input" type="text" placeholder="Find weather for...">
+        <button class="search" type="submit" onclick="handleSearch()"><i class="fas fa-search"></i></button>
+    </div>
+    <div id="current-city-container"></div>
+    <div id="cities-container"></div>
+
+
+    <script id="cities-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <div id= {{name}} class="cityWeather">
+            <div><button class="save" type="button"><i class="fas fa-plus-circle"></i></button><button class="delete" type="button"><i class="fas fa-minus-circle"></i></button></div>
+            <div class="name">{{name}}</div>
+            <div class="temp">{{temp}}&#8451</div>
+            <div class="condition">{{condition}}</div>
+            <img class="pic" src= {{conditionPic}} 
+                onerror="if (this.src != 'error.jpg') this.src = 'https://icon-library.com/images/weather-icon/weather-icon-14.jpg'"
+                alt="weather icon">
+               
+        </div>
+        {{/each}}
+    </script>
+
+
+    <script src="./jquery/dist/jquery.js"></script>
+    <script src="./handlebars/dist/handlebars.js"></script>
+    <script src="tempManager.js"></script>
+    <script src="Renderer.js"></script>
+    <script src="main.js"></script>
 </body>
+
 </html>

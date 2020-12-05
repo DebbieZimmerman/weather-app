@@ -2,6 +2,9 @@ const express = require('express')
 const axios = require('axios').default
 const router = express.Router()
 const City = require('../models/CityModel')
+const env = require('dotenv').config()
+
+const apiKey = process.env.WEATHER_API_KEY
 
 router.get('/sanity', (req, res) => {
     res.send('Route works')
@@ -14,9 +17,9 @@ router.get('/weather/:city', async (req, res) => {
         weather = weather.data
         const cityWeather = {
             name: city,
-            temp: weather.main.temp,
+            temp: Math.round(weather.main.temp),
             condition: weather.weather[0].main,
-            conditionPic: weather.weather[0].icon
+            conditionPic: `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`
         }
         res.send(cityWeather)
     } catch (err) {
@@ -26,7 +29,6 @@ router.get('/weather/:city', async (req, res) => {
 
 router.get('/cities', async (req, res) => {
        try {
-        console.log('try')
         const cities = await City.find({})
         res.send(cities)
     } catch {
