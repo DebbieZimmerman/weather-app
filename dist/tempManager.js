@@ -24,7 +24,7 @@ class TempManager {
 
     async updateCity(cityName) {
         const index = this.cityData.findIndex(c => c.name === cityName)
-        $.ajax({
+        await $.ajax({
             url: `weather/${cityName}`,
             method: 'PUT',
             success: (res) => this.cityData.splice(index, 1, res),

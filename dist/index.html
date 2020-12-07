@@ -34,9 +34,11 @@
             <div class="name">{{name}}</div>
             <div class="temp">{{temp}}&#176</div>
             <div class="condition">{{condition}}</div>
-            <div class=pic-container><img class="pic" src= {{conditionPic}} 
+            <!-- <div class=pic-container> -->
+                <img class="pic" src= {{conditionPic}} 
                 onerror="if (this.src != 'error.jpg') this.src = 'https://icon-library.com/images/weather-icon/weather-icon-14.jpg'"
-                alt="weather icon"></div>
+                alt="weather icon">
+            <!-- </div> -->
                
         </div>
         {{/each}}
